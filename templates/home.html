@@ -1,0 +1,57 @@
+{% extends "material/base.html" %}
+{% import "material/utils.html" as util %}
+{% import "material/wtf.html" as wtf %}
+
+{% block title %}Hello, world!{% endblock %}
+
+{% block content %}
+{{ container() }}
+        {{ row() }}
+                {{ col(['s12', 'm6']) }}
+                    {{ util.card('Hello world!', wtf.quick_form(form) )}}
+                {{ enddiv() }}
+                {{ col(['s12', 'm6'])}}
+                    {{ util.card('Isn\'t Flask great?', '<p>I really do enjoy it!</p>', [['https://bitbucket.org/cyberspy/flask_materialize', 'My Bitbucket']])}}
+                    {{ util.card('CARD-TITLE', 'CARD-CONTENT-CAN-USE-HTML-HERE', [['http://google.com/LINK.html', 'Link Title'], ['http://www.google.co.uk/link2.html', 'Link Title2']]) }}
+                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>
+                    <div class="collection">
+                        <a href="#!" class="collection-item">
+                            <p>
+                                <label>
+                                  <input type="checkbox" />
+                                  <span>Red</span>
+                                </label>
+                              </p>
+                        </a>
+                        {%for todo in todo_items%}
+                      <a href="#!" class="collection-item">
+                        <p>
+                            <label>
+                              <input type="checkbox" />
+                              <span>{{todo}}</span>
+                            </label>
+                          </p>
+                    </a>
+                      {%endfor%}
+                        <a href="#!" class="collection-item active">Alvin</a>
+                        <a href="#!" class="collection-item">Alvin</a>
+                        <a href="#!" class="collection-item">
+                            <label>
+                                <span>Failed Tasks</span>
+                            </label>
+                        </a>
+                        <a href=# id=test><button class='btn btn-default'>Test</button></a>
+                      </div>
+                      <div class="container">
+                        <h2>Button Pressed: {{ButtonPressed}}</h2>
+                        <form method="post">
+                            <input type="submit" value="Click Me" >
+                        </form>
+                     </div>`
+                      <form action="/forward/">
+                        <button name="forwardBtn" type="submit">Forward</button>
+                    </form>
+                {{ enddiv() }}
+        {{ enddiv() }}
+{{ enddiv() }}
+{% endblock %}
