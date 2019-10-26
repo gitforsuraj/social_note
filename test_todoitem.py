@@ -8,7 +8,7 @@ def new_todoitem():
     todoitem = TodoItem('this is title',True, datetime(days=50,seconds=27,microseconds=10,milliseconds=29000,minutes=5,hours=8,weeks=2)) 
     return todoitem
 
-def test_new_todoitem():
+def test_new_todoitem(todoitem):
     assert todoitem.title == 'this is title' 
     assert todoitem.is_done == True
-    assert new_user.creation_date == datetime(days=50,seconds=27,microseconds=10,milliseconds=29000,minutes=5,hours=8,weeks=2)
+    assert todoitem.creation_date == datetime(days=50,seconds=27,microseconds=10,milliseconds=29000,minutes=5,hours=8,weeks=2)
