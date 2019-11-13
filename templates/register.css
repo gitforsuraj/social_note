@@ -2,7 +2,7 @@ html{
   background-color: #1E90FF;
 }
 
-.middle{
+.mainheader{
     text-align: center;
 }
 
@@ -27,5 +27,4 @@ html{
   box-sizing: border-box;
   font-size: 14px;
 }
-
 
