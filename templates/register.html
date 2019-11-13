@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Register</h1>
+    <h1 class="mainheader">Register</h1>
     <form class ="box" action="" method="post">
         {{ form.hidden_tag() }}
         <p>
@@ -28,7 +28,6 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>{{ form.submit() }}</p>
         <button type="submit" class="btn btn-primary">Register</button>
     </form>
 {% endblock %}
