@@ -78,8 +78,7 @@ def update_todo(title:str, is_done:bool):
  
     query = ''' UPDATE todos
                 SET is_done = ?
-              WHERE title = ?
-              VALUES(?,?)'''
+                WHERE title = ?'''
     db = get_db()
     cur = db.cursor()
     cur.execute(query, todo_tuple)

@@ -15,4 +15,4 @@ login = LoginManager(app)
 # right side is the function that's called to login users
 login.login_view = 'login'
 
-from app import routes, models, todo_item
+from app import routes, models
