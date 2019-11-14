@@ -10,3 +10,4 @@ Our second feature was the register page for new users to create an account. It 
 
 Our third feature was the to-do list page where the user will open an entry and fill out the field with data requested. Once the data fields like (name of task, etc) have been entered, the program will send the entry to the local database to store for later. This feature was coded using Python, flask, and local database. 
 
+Our Creation page allows users to create new todo items they hope to accomplish. Using python and flask, we created a feature that can create new tasks with times and dates, can alert the user, and set its priority to other tasks. The tasks that are created are stored in the Firebase database and can be seen by other users on their feeds when they are accomplished.
