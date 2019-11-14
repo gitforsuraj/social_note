@@ -1,0 +1,158 @@
+{% extends "material/base.html" %}
+{% import "material/utils.html" as util %}
+{% import "material/wtf.html" as wtf %}
+
+{% block title %}Hello, world!{% endblock %}
+
+<html>
+
+<body>
+  {% block content %}
+  {{ container() }}
+  {{ row() }}
+  {{ col(['s12', 'm12']) }}
+  {{ util.card('Create a to-do', wtf.quick_form(form) )}}
+  {{ enddiv() }}
+  {{ col(['s12', 'm12'])}}
+
+  <div class="row">
+    <div class="col s12 m12">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">My Todos</span>
+          <!-- <p>I am a very simple card. I am good at containing small bits of information.
+        I am convenient because I require little markup to use effectively.</p> -->
+        </div>
+        <!-- <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+      </div> -->
+      </div>
+    </div>
+  </div>
+  <!--<a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>-->
+
+
+  <!-- <button class="btn btn-primary" id="sendButton">Send data</button> -->
+  <!-- <script>
+      function getData() {
+        $.post("/postmethod",
+          {
+            data: "1"
+          }, function (err, req, resp) {
+            alert("Data: " + err + "\nStatus: " + resp);
+          });
+      }
+
+      document.getElementById("sendButton").addEventListener("click", getData);
+    </script> -->
+
+  <div class="collection">
+    {%for todo in todos%}
+  {%if todo.is_done%}
+    <a href="#!" class="collection-item">
+      <p>
+        <label>
+          <input id="{{todo.title}}" name="{{todo.title}}" type="checkbox"
+            {{'checked="checked"' if todo.is_done else ""}}
+            onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" />
+          <span>{{todo.title}}</span>
+        </label>
+      </p>
+    </a>
+
+    <script>
+      function onChanged(elem, title, val) {
+        // var wrapper = document.getElementById("myHTMLWrapper");
+
+        // var myHTML = '<span class="test">Testing out my script!</span>';
+
+        // wrapper.innerHTML = myHTML;
+        alert(val)
+        $.post("/postmethod",
+          {
+            data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
+          }, function (err, req, resp) {
+
+          });
+
+        //request.post('http://127.0.0.1:5000/postmethod',{"title":title,"val":!val});
+
+        alert("hi there" + title);
+      }
+    </script>
+    {%endif%}
+    {%endfor%}
+  </div>
+
+  <div class="collection">
+    {%for todo in todos%}
+    {%if not todo.is_done%}
+    <a href="#!" class="collection-item">
+      <p>
+        <label>
+          <input id="{{todo.title}}" name="{{todo.title}}" type="checkbox"
+            {{'checked="checked"' if todo.is_done else ""}}
+            onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" />
+          <span>{{todo.title}}</span>
+          
+        </label>
+      </p>
+    </a>
+
+    <script>
+      function onChanged(elem, title, val) {
+        // var wrapper = document.getElementById("myHTMLWrapper");
+
+        // var myHTML = '<span class="test">Testing out my script!</span>';
+
+        // wrapper.innerHTML = myHTML;
+        alert(val)
+        $.post("/postmethod",
+          {
+            data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
+          }, function (err, req, resp) {
+
+          });
+
+        //request.post('http://127.0.0.1:5000/postmethod',{"title":title,"val":!val});
+
+        alert("hi there" + title);
+      }
+    </script>
+    {%endif%}
+    {%endfor%}
+  </div>
+
+
+  <div id="myHTMLWrapper">
+
+  </div>
+
+
+  <!-- <a href="#!" class="collection-item active">Alvin</a>
+                        <a href="#!" class="collection-item">Alvin</a>
+                        <a href="#!" class="collection-item">
+                            <label>
+                                <span>Failed Tasks</span>
+                            </label>
+                        </a>
+                        <a href=# id=test><button class='btn btn-default'>Test</button></a>
+                      </div>
+                      <div class="container">
+                        <h2>Button Pressed: {{ButtonPressed}}</h2>
+                        <form method="post">
+                            <input type="submit" value="Click Me" >
+                        </form>
+                     </div>`
+                      <form action="/forward/">
+                        <button name="forwardBtn" type="submit">Forward</button>
+                    </form> -->
+  {{ enddiv() }}
+  {{ enddiv() }}
+  {{ enddiv() }}
+  {% endblock %}
+
+</body>
+
+</html>
