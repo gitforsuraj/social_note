@@ -51,18 +51,55 @@ def get_db():
         db = g._database = sqlite3.connect(DATABASE)
     return db
 
-def query_db(query, args=(), one=False):
-    cur = get_db().execute(query, args)
+def query_db(query, args=(), username = 'todos', one=False):
+    try:
+        cur = get_db().execute(query, args)
+        rv = cur.fetchall()
+        cur.close()
+        return (rv[0] if rv else None) if one else rv
+
+    except:
+        sql_create_table = """ CREATE TABLE IF NOT EXISTS """+current_user.username+""" (
+                                        user_id text NOT NULL,
+                                        title text NOT NULL,
+                                        date text NOT NULL,
+                                        is_done integer default 0
+                                    )"""
+        query = ''' INSERT INTO ''' + username + '''(user_id,title,date,is_done)
+              VALUES(?,?,?,?) '''
+        db = get_db()
+        #db.execute("PRAGMA busy_timeout = 30000")
+        cur = db.execute(sql_create_table)
+        db.commit()
+        cur.close()
+
+        # #create the first todo for first-time user
+        # args = (username, 'This is your first todo', datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),0)
+        # cur = db.execute(query, args)
+        # #cur.commit()
+
+        query = 'select * from '+current_user.username
+        cur = get_db().execute(query, ())
+        rv = cur.fetchall()
+        cur.close()
+        return (rv[0] if rv else None) if one else rv
+
+def query_db_by_username(username,query, args=(), one=False):
+    cur = get_db().execute("SELECT name FROM sqlite_master WHERE type='table' AND name= ? ", ('todos',))
+    print("printing cur")
+    print(cur)
     rv = cur.fetchall()
+    print("printing rv")
+    print(rv)
     cur.close()
     return (rv[0] if rv else None) if one else rv
 
 #create a todo in database
 def create_todo(todo:TodoItem):
-    user_id = 'first_user'
+    user_id = current_user.username
     todo_tuple = (user_id, todo.title,todo.creation_date.strftime("%m/%d/%Y, %H:%M:%S"), 1 if todo.is_done else 0)
  
-    query = ''' INSERT INTO todos(user_id,title,date,is_done)
+    query = ''' INSERT INTO '''+ current_user.username+'''(user_id,title,date,is_done)
               VALUES(?,?,?,?) '''
     db = get_db()
     cur = db.cursor()
@@ -103,8 +140,8 @@ def get_post_javascript_data():
     return ''
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods = ['GET','POST'])
+@app.route('/index', methods = ['GET','POST'])
 @login_required
 def index():
     form = ExampleForm()   
@@ -127,10 +164,15 @@ def index():
         }
     ]
 
+
+    
+
     #get all todos from database
     print('before the for loop')
     todos.clear()
-    for todo in query_db('select * from todos'):
+    username = current_user.username
+    print(current_user.username)
+    for todo in query_db('select * from {username}'):
         print(todo)
         todo_items[todo[1]] = False
         if todo[2] != '':
