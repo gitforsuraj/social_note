@@ -34,4 +34,4 @@ uritemplate==3.0.0
 urllib3==1.25.6
 Werkzeug==0.16.0
 WTForms==2.2.1
-flask_sqlalchemy==1.0.10
+flask_sqlalchemy==2.4.0
