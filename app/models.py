@@ -11,13 +11,6 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(128))
     posts = db.relationship('Post', backref='author', lazy='dynamic')
 
-    user_name = ''
-    passcode = ''
-
-    def User(self, un, passcode):
-        user_name = un
-        passcode = passcode
-
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -36,6 +29,14 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Posts {}>'.format(self.body)
+
+class TempUser:
+    user_name = ''
+    passcode = ''
+
+    def __init__(self, un, passcode):
+        user_name = un
+        passcode = passcode
 
 @login.user_loader
 def load_user(id):
