@@ -14,7 +14,7 @@ class User(UserMixin, db.Model):
     user_name = ''
     passcode = ''
 
-    def create_user(un, passcode):
+    def User(self, un, passcode):
         user_name = un
         passcode = passcode
 

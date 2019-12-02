@@ -9,7 +9,6 @@ from app.models import User
 #     return todoitem
 
 def test_new_user():
-    user = User()
-    user.create_user('user','passcode')
+    user = User('user','passcode')
     assert user.user_name == 'user' 
     assert user.passcode == 'passcode'
