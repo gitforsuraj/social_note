@@ -85,6 +85,20 @@ def query_db(query, args=(), username = 'todos', one=False):
         return (rv[0] if rv else None) if one else rv
 
 def query_db_by_username(username,query, args=(), one=False):
+    """
+    Summary generic_socket.
+    Extended description of generic_socket.
+    Parameters
+    ----------
+    username : str
+        the username of the targeted user
+    query : str
+        the query string
+    Returns
+    -------
+    list
+        return all TodoItems of the user
+    """
     cur = get_db().execute("SELECT name FROM sqlite_master WHERE type='table' AND name= ? ", ('todos',))
     print("printing cur")
     print(cur)
@@ -110,10 +124,10 @@ def create_todo(todo:TodoItem):
 
 #update a todo in database
 def update_todo(title:str, is_done:bool):
-    user_id = 'first_user'
+    user_id = current_user.username
     todo_tuple = (is_done, title)
  
-    query = ''' UPDATE todos
+    query = ''' UPDATE '''+ user_id +'''
                 SET is_done = ?
                 WHERE title = ?'''
     db = get_db()
@@ -153,19 +167,17 @@ def index():
     else:
         form.field1.description = ''
 
-    posts = [
-        {
-            'author': {'username': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
+    # posts = [
+    #     {
+    #         'author': {'username': 'John'},
+    #         'body': 'Beautiful day in Portland!'
+    #     },
+    #     {
+    #         'author': {'username': 'Susan'},
+    #         'body': 'The Avengers movie was so cool!'
+    #     }
+    # ]
 
-
-    
 
     #get all todos from database
     print('before the for loop')

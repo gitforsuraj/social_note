@@ -59,6 +59,9 @@
             {{'checked="checked"' if todo.is_done else ""}}
             onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" />
           <span>{{todo.title}}</span>
+          <span style="color:grey">Created </span>
+          <span>{{get_time_elapse(todo.creation_date)}}</span>
+
         </label>
       </p>
     </a>
@@ -97,7 +100,8 @@
             {{'checked="checked"' if todo.is_done else ""}}
             onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" />
           <span>{{todo.title}}</span>
-          
+          <span style="color:black">Created </span>
+          <span>{{get_time_elapse(todo.creation_date)}}</span>
         </label>
       </p>
     </a>
