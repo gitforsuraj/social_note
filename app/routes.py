@@ -137,6 +137,15 @@ def update_todo(title:str, is_done:bool):
     #db.close()
     return 0
 
+def delete_todo(title:str):
+    user_id = current_user.username
+    query = '''DELETE FROM '''  + user_id +''' WHERE title=?'''
+    query_tuple = (title,)
+    db = get_db()
+    cur = db.cursor()
+    cur.execute(query, query_tuple)
+    db.commit()
+    
 
 
 @app.route('/postmethod',methods = ['POST'])
@@ -152,6 +161,18 @@ def get_post_javascript_data():
     update_todo(data['title'], False if data['val'] == 0 else True)
 
     return ''
+
+@app.route('/delete_postmethod',methods = ['POST'])
+def delete_post():
+    print(request.form['data'])
+    data = json.loads(request.form['data'])
+
+    print(data)
+    print('checking post data')
+
+    delete_todo(data['title'])
+
+    return redirect(url_for('index'))
 
 
 @app.route('/', methods = ['GET','POST'])
@@ -194,7 +215,11 @@ def index():
 
     form.field1.data = ""
 
-    return render_template('home.html', title='Home', form = form, todo_items = todo_items, todos = todos, get_time_elapse = helpers.get_time_elapse)
+    done_count = len(list(filter(lambda todo: todo.is_done, todos)))
+    undone_count = len(list(filter(lambda todo: not todo.is_done, todos)))
+
+
+    return render_template('home.html', title='Home', form = form, todo_items = todo_items, todos = todos, get_time_elapse = helpers.get_time_elapse, done_count = done_count, undone_count = undone_count)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

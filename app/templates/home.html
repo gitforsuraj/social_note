@@ -2,10 +2,13 @@
 {% import "material/utils.html" as util %}
 {% import "material/wtf.html" as wtf %}
 
-{% block title %}Hello, world!{% endblock %}
+{% block title %}Social Note{% endblock %}
 
 <html>
 
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
 
 <body>
   {% block content %}
@@ -50,10 +53,27 @@
     </script> -->
 
   <div class="collection">
+
+    <a href="#!" class="collection-item">
+      <h6>{{done_count}} Completed</h6>
+    </a>
     {%for todo in todos%}
-  {%if todo.is_done%}
+    {%if todo.is_done%}
+
     <a href="#!" class="collection-item">
       <p>
+        <label>
+          <!-- <input id="{{todo.title}}" name="{{todo.title}}" type="submit"
+            onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')"></input> -->
+
+          <button class="waves-effect waves-teal btn-flat" type="submit" name="action"
+            onclick="onDeleted(this,'{{todo.title}}','{{todo.is_done}}')">
+            <i style="color: teal" class="material-icons right">delete</i>
+          </button>
+
+
+        </label>
+
         <label>
           <input id="{{todo.title}}" name="{{todo.title}}" type="checkbox"
             {{'checked="checked"' if todo.is_done else ""}}
@@ -61,19 +81,30 @@
           <span>{{todo.title}}</span>
           <span style="color:grey">Created </span>
           <span>{{get_time_elapse(todo.creation_date)}}</span>
-
         </label>
       </p>
     </a>
 
     <script>
+      function onDeleted(elem, title, val) {
+
+        $.post("/delete_postmethod",
+          {
+            data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
+          }, function (err, req, resp) {
+
+          });
+
+        window.location.reload(false);
+      }
+
       function onChanged(elem, title, val) {
         // var wrapper = document.getElementById("myHTMLWrapper");
 
         // var myHTML = '<span class="test">Testing out my script!</span>';
 
         // wrapper.innerHTML = myHTML;
-        alert(val)
+        //alert(val)
         $.post("/postmethod",
           {
             data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
@@ -83,7 +114,7 @@
 
         //request.post('http://127.0.0.1:5000/postmethod',{"title":title,"val":!val});
 
-        alert("hi there" + title);
+        //alert("hi there" + title);
       }
     </script>
     {%endif%}
@@ -91,39 +122,59 @@
   </div>
 
   <div class="collection">
+    <a href="#!" class="collection-item">
+      <h6>{{undone_count}} Incompleted</h6>
+    </a>
     {%for todo in todos%}
     {%if not todo.is_done%}
+
     <a href="#!" class="collection-item">
       <p>
+
+        <label>
+          <!-- <input id="{{todo.title}}" name="{{todo.title}}" type="submit"
+                onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')"></input> -->
+
+          <button class="waves-effect waves-teal btn-flat" type="submit" name="action"
+            onclick="onDeleted(this,'{{todo.title}}','{{todo.is_done}}')">
+            <i class="material-icons right">delete</i>
+          </button>
+
+
+        </label>
+
         <label>
           <input id="{{todo.title}}" name="{{todo.title}}" type="checkbox"
             {{'checked="checked"' if todo.is_done else ""}}
             onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" />
           <span>{{todo.title}}</span>
-          <span style="color:black">Created </span>
+          <span style="color:grey">Created </span>
           <span>{{get_time_elapse(todo.creation_date)}}</span>
         </label>
       </p>
     </a>
 
     <script>
-      function onChanged(elem, title, val) {
-        // var wrapper = document.getElementById("myHTMLWrapper");
+      function onDeleted(elem, title, val) {
 
-        // var myHTML = '<span class="test">Testing out my script!</span>';
-
-        // wrapper.innerHTML = myHTML;
-        alert(val)
-        $.post("/postmethod",
+        $.post("/delete_postmethod",
           {
             data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
           }, function (err, req, resp) {
 
           });
 
-        //request.post('http://127.0.0.1:5000/postmethod',{"title":title,"val":!val});
+        window.location.reload(false);
+      }
 
-        alert("hi there" + title);
+      function onChanged(elem, title, val) {
+      
+        $.post("/postmethod",
+          {
+            data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
+          }, function (err, req, resp) {
+
+          });
       }
     </script>
     {%endif%}
@@ -136,7 +187,7 @@
   </div>
 
   <div>
-      <a href="{{ url_for('logout') }}">Logout</a>
+    <a href="{{ url_for('logout') }}">Logout</a>
   </div>
 
 
