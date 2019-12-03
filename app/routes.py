@@ -194,7 +194,7 @@ def index():
 
     form.field1.data = ""
 
-    return render_template('home.html', title='Home', posts=posts, form = form, todo_items = todo_items, todos = todos, get_time_elapse = helpers.get_time_elapse)
+    return render_template('home.html', title='Home', form = form, todo_items = todo_items, todos = todos, get_time_elapse = helpers.get_time_elapse)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
