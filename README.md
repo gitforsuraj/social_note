@@ -4,6 +4,8 @@
 
 To run the program, execute ```python3 myblog.py```
 
+Link to the website: [Social Note](https://team7-social-note.herokuapp.com/login?next=%2F)
+
 OUR FEATURES
 ------------------------------------------------------------------------------------------------------------------------------
 The login page is used to grab the data entered and verify if the username and password entered are stored in the SQLite database. If the data entered is in the SQLite database, the user can now access the rest of the features within the app. If the user is not found in the SQLite database, the system will prompt the user to register. This feature was coded by using the given template in flask and adding our own HTML and CSS elements. We organized the page in a more unique way and gave it a design by adding CSS styles to the site.
