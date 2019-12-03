@@ -35,8 +35,8 @@ class TempUser:
     passcode = ''
 
     def __init__(self, un, passcode):
-        user_name = un
-        passcode = passcode
+        self.user_name = un
+        self.passcode = passcode
 
 @login.user_loader
 def load_user(id):
