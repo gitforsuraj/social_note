@@ -25,7 +25,7 @@ Created to-dos will move do their designated location based on "completed" and "
 We used CRUD operations with SQLite Database to create, update, read, and delete operations. This is used to implement features like saving new users to the database, and accessing users when logging in. Rach user has a unique table named after
 them. The table is used to access the user's data. 
 
-Once a to-do is moved to the "failed section," to remind the user of their failed attempts(motivation).
+Once a to-do is moved to the "failed section," to remind the user of their failed attempts(motivation and reminder), the user will be able to see all the times they have failed to complete a task due to procrastination. This was implemented the same way as the "completed" and "incompleted" sections. 
 
 Creation date displays the time that been passed since the creation time. This is done by comparing the time that the to-do was created to the current time. The time that is displayed will update whenver the user vists the page. 
 
