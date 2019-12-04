@@ -28,10 +28,7 @@
           <!-- <p>I am a very simple card. I am good at containing small bits of information.
         I am convenient because I require little markup to use effectively.</p> -->
         </div>
-        <!-- <div class="card-action">
-        <a href="#">This is a link</a>
-        <a href="#">This is a link</a>
-      </div> -->
+
       </div>
     </div>
   </div>
@@ -191,8 +188,6 @@
       <p>
 
         <label>
-          <!-- <input id="{{todo.title}}" name="{{todo.title}}" type="submit"
-                onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')"></input> -->
 
           <button class="waves-effect waves-teal btn-flat" type="submit" name="action"
             onclick="onDeleted(this,'{{todo.title}}','{{todo.is_done}}')" disabled>
@@ -248,26 +243,6 @@
   <div>
     <a href="{{ url_for('logout') }}">Logout</a>
   </div>
-
-
-  <!-- <a href="#!" class="collection-item active">Alvin</a>
-                        <a href="#!" class="collection-item">Alvin</a>
-                        <a href="#!" class="collection-item">
-                            <label>
-                                <span>Failed Tasks</span>
-                            </label>
-                        </a>
-                        <a href=# id=test><button class='btn btn-default'>Test</button></a>
-                      </div>
-                      <div class="container">
-                        <h2>Button Pressed: {{ButtonPressed}}</h2>
-                        <form method="post">
-                            <input type="submit" value="Click Me" >
-                        </form>
-                     </div>`
-                      <form action="/forward/">
-                        <button name="forwardBtn" type="submit">Forward</button>
-                    </form> -->
   {{ enddiv() }}
   {{ enddiv() }}
   {{ enddiv() }}
