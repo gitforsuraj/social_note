@@ -14,6 +14,10 @@ The register page for new users to create an account. It required them to enter 
 
 The to-do list page where the user will open an entry and fill out the field with data requested. Once the data fields like (name of task, etc) have been entered, the program will send the entry to the local database to store for later. This feature was coded using Python, flask, and local database. 
 
+Our Creation page allows users to create new todo items they hope to accomplish. Using python and flask, we created a feature that can create new tasks with times and dates, can alert the user, and set its priority to other tasks. The tasks that are created are stored in the SQLite database and can be seen by other users on their feeds when they are accomplished. 
+
+Based on a 24 hour timer, to-dos will move to the "failed" section on the page to show tasks that were not completed on time. For each task, there is an atribuite called creation datd, if the creation data is greater than the current date, the task will instantly be transfered to the failed to-dos section. 
+
 We used CRUD operations with SQLite Database to create, update, read, and delete operations. This is used to implement features like saving new users to the database, and accessing users when logging in. Rach user has a unique table named after
 them. The table is used to access the user's data. 
 
