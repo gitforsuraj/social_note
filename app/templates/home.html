@@ -126,7 +126,67 @@
       <h6>{{undone_count}} Incompleted</h6>
     </a>
     {%for todo in todos%}
-    {%if not todo.is_done%}
+    {%if not is_greater_than_24_hours(todo.creation_date) and not todo.is_done%}
+
+    <a href="#!" class="collection-item">
+      <p>
+
+        <label>
+          <!-- <input id="{{todo.title}}" name="{{todo.title}}" type="submit"
+                onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')"></input> -->
+
+          <button class="waves-effect waves-teal btn-flat" type="submit" name="action"
+            onclick="onDeleted(this,'{{todo.title}}','{{todo.is_done}}')">
+            <i class="material-icons right">delete</i>
+          </button>
+
+
+        </label>
+
+        <label>
+          <input id="{{todo.title}}" name="{{todo.title}}" type="checkbox"
+            {{'checked="checked"' if todo.is_done else ""}}
+            onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" />
+          <span>{{todo.title}}</span>
+          <span style="color:grey">Created </span>
+          <span>{{get_time_elapse(todo.creation_date)}}</span>
+        </label>
+      </p>
+    </a>
+
+    <script>
+      function onDeleted(elem, title, val) {
+
+        $.post("/delete_postmethod",
+          {
+            data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
+          }, function (err, req, resp) {
+
+          });
+
+        window.location.reload(false);
+      }
+
+      function onChanged(elem, title, val) {
+      
+        $.post("/postmethod",
+          {
+            data: JSON.stringify({ "title": title, "val": val == "True" ? 0 : 1 })
+          }, function (err, req, resp) {
+
+          });
+      }
+    </script>
+    {%endif%}
+    {%endfor%}
+  </div>
+
+  <div class="collection">
+    <a href="#!" class="collection-item">
+      <h6>{{failed_count}} Failed</h6>
+    </a>
+    {%for todo in todos%}
+    {%if is_greater_than_24_hours(todo.creation_date) and not todo.is_done%}
 
     <a href="#!" class="collection-item">
       <p>

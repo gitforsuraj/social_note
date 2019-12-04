@@ -18,3 +18,8 @@ def get_time_elapse(d:datetime.datetime):
         return str(now.minute - d.minute) + ' mintue' + ('s' if now.minute - d.minute > 1 else '') +' ago'
     else:
         return ' just now'
+
+def is_greater_than_24_hours(d:datetime.datetime):
+    now = datetime.datetime.now()
+    return (now.year == d.year and now.month == d.month and now.day - d.day > 1)
+    

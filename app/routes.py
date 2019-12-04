@@ -216,10 +216,10 @@ def index():
     form.field1.data = ""
 
     done_count = len(list(filter(lambda todo: todo.is_done, todos)))
-    undone_count = len(list(filter(lambda todo: not todo.is_done, todos)))
+    undone_count = len(list(filter(lambda todo: not helpers.is_greater_than_24_hours(todo.creation_date) and not todo.is_done, todos)))
+    failed_count = len(list(filter(lambda todo: helpers.is_greater_than_24_hours(todo.creation_date) and not todo.is_done, todos)))
 
-
-    return render_template('home.html', title='Home', form = form, todo_items = todo_items, todos = todos, get_time_elapse = helpers.get_time_elapse, done_count = done_count, undone_count = undone_count)
+    return render_template('home.html', title='Home', form = form, todo_items = todo_items, todos = todos, get_time_elapse = helpers.get_time_elapse, done_count = done_count, undone_count = undone_count, failed_count = failed_count, is_greater_than_24_hours=helpers.is_greater_than_24_hours)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
