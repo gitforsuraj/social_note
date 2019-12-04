@@ -18,6 +18,10 @@ Our Creation page allows users to create new todo items they hope to accomplish.
 
 Based on a 24 hour timer, to-dos will move to the "failed" section on the page to show tasks that were not completed on time. For each task, there is an atribuite called creation datd, if the creation data is greater than the current date, the task will instantly be transfered to the failed to-dos section. 
 
+Counter keeps track of the quantity of completed and incompleted to-dos. This feature was coded by using the given template in flask and adding our own HTML and CSS elements. We organized the page in a more unique way and gave it a design by adding CSS styles to the site.
+
+Created to-dos will move do their designated location based on "completed" and "incompleted" status to allow users to visually see their progress made. One the user has check the box field(represented by true and false), the to-do will move to the new location or stay in its current section.
+
 We used CRUD operations with SQLite Database to create, update, read, and delete operations. This is used to implement features like saving new users to the database, and accessing users when logging in. Rach user has a unique table named after
 them. The table is used to access the user's data. 
 
