@@ -196,7 +196,7 @@
                 onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')"></input> -->
 
           <button class="waves-effect waves-teal btn-flat" type="submit" name="action"
-            onclick="onDeleted(this,'{{todo.title}}','{{todo.is_done}}')">
+            onclick="onDeleted(this,'{{todo.title}}','{{todo.is_done}}')" disabled>
             <i class="material-icons right">delete</i>
           </button>
 
@@ -205,8 +205,8 @@
 
         <label>
           <input id="{{todo.title}}" name="{{todo.title}}" type="checkbox"
-            {{'checked="checked"' if todo.is_done else ""}}
-            onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" />
+            {{'checked="checked"' if todo.is_done else ""}} 
+            onclick="onChanged(this,'{{todo.title}}','{{todo.is_done}}')" disabled/>
           <span>{{todo.title}}</span>
           <span style="color:grey">Created </span>
           <span>{{get_time_elapse(todo.creation_date)}}</span>

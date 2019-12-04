@@ -21,5 +21,5 @@ def get_time_elapse(d:datetime.datetime):
 
 def is_greater_than_24_hours(d:datetime.datetime):
     now = datetime.datetime.now()
-    return (now.year == d.year and now.month == d.month and now.day - d.day > 1)
+    return now.year - d.year >= 1 or now.month - d.month >=1 or now.day - d.day >= 1
     
