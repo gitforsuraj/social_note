@@ -25,13 +25,13 @@ Created to-dos will move do their designated location based on "completed" and "
 We used CRUD operations with SQLite Database to create, update, read, and delete operations. This is used to implement features like saving new users to the database, and accessing users when logging in. Rach user has a unique table named after
 them. The table is used to access the user's data. 
 
-Once a to-do is moved to the "failed section," to remind the user of their failed attempts(motivation). This was implemented similarly to the regular check box, however, it is always "greyed" out.
+Once a to-do is moved to the "failed section," to remind the user of their failed attempts(motivation).
 
 Creation date displays the time that been passed since the creation time. This is done by comparing the time that the to-do was created to the current time. The time that is displayed will update whenver the user vists the page. 
 
 HTML/CSS/JS features:
 Content will be highlighted when cursor is hovering over content to keep track of where the user is looking when there is an excessive amount of to-dos on the webpage. This feature was implemented using HTML/CSS.
 
-
+The option of completed the task is "greyed" out for failed to-do items. This was implemented similarly to the regular check box, however, it is always "greyed" out. This feature was implemented using HTML/CSS to block the the ability of selecting the box. Since the user is unable to select the box, the to-do will remain in "failed" forever. 
 
 
