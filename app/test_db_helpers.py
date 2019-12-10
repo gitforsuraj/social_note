@@ -119,7 +119,7 @@ def test_db_helpers():
     #testing query function(new table when if not exist)
     key=1
     query_db('select * from {username}')
-    assert check_table_exists(table_name) == True
+    assert check_table_exists(table_name) == False
 
     #testing insert function
     todoitem = TodoItem('this is title',True, datetime(year= 2019, month = 10,day= 29)) 
