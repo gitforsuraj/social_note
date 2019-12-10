@@ -24,7 +24,7 @@ def check_table_exists(table_name):
     # c = conn.cursor()
 
     sql_delete_table = ''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name=' '''+table_name+''' ' '''
-    sql_delete_table = ''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name= 'a' '''
+    sql_delete_table = ''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name= a '''
 
     c = conn.cursor()
     c.execute(sql_delete_table)
