@@ -10,9 +10,9 @@ key_json_file_path = os.path.join(THIS_FOLDER, 'key.json')
 DATABASE = os.path.join(THIS_FOLDER, 'database.db')
 
 def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = sqlite3.connect(DATABASE)
+    # db = getattr(g, '_database', None)
+    # if db is None:
+    db = sqlite3.connect(DATABASE)
     return db
 
 def check_table_exists(table_name):
