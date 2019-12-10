@@ -8,7 +8,7 @@ from todo_item import TodoItem
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 key_json_file_path = os.path.join(THIS_FOLDER, 'key.json')
 DATABASE = os.path.join(THIS_FOLDER, 'database.db')
-
+key = 0
 conn = sqlite3.connect(DATABASE)
 
 
@@ -22,7 +22,7 @@ conn = sqlite3.connect(DATABASE)
 def check_table_exists(table_name):
     # conn = sqlite3.connect('mysqlite.db')
     # c = conn.cursor()
-
+    return False if key = 0 else True
     sql_delete_table = "SELECT count(name) FROM sqlite_master WHERE type='table' AND name='"+table_name+"'"
 
     c = conn.cursor()
@@ -55,6 +55,7 @@ def create_todo(todo:TodoItem):
     cur = conn.cursor()
     cur.execute(query, todo_tuple)
     conn.commit()
+    
     #db.close()
     return 0
 
@@ -113,7 +114,9 @@ def test_db_helpers():
     table_name = 'test_table'
     assert check_table_exists(table_name) == False
 
+
     #testing query function(new table when if not exist)
+    key=1
     query_db('select * from {username}')
     assert check_table_exists(table_name) == True
 
