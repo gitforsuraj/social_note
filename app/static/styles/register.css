@@ -12,10 +12,10 @@ body div h1{
 
 
 .box{
-  border-radius: 15px;
+  border-radius: 20px;
   position: relative;
   z-index: 1;
-  background: #FFFFFF;
+  background: #FFFFFE;
   max-width: 360px;
   margin: 0 auto 100px;
   padding: 45px;
@@ -54,17 +54,17 @@ body div h1{
 }
 
 .backgroundField{
-	background: #ffffff;
-	width: 38px;
-	height: 38px;
+	background: #fffffe;
+	width: 39px;
+	height: 39px;
 	display: inline-block;
 	text-align: center;
-	line-height: 38px;
+	line-height: 39px;
 }
 
 .postitionBox {
     position: absolute;
-    color: #ffffff;
+    color: #fffffe;
     top: 40%;
     font-size: 60px;
     z-index: 12;
