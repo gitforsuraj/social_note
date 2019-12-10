@@ -3,6 +3,8 @@ import sqlite3
 import datetime
 import json
 import routes
+from datetime import datetime
+from todo_item import TodoItem
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 key_json_file_path = os.path.join(THIS_FOLDER, 'key.json')
