@@ -12,13 +12,6 @@ key = 0
 conn = sqlite3.connect(DATABASE)
 
 
-# def get_db():
-#     # db = getattr(g, '_database', None)
-#     # if db is None:
-#     conn = sqlite3.connect(DATABASE)
-
-#     return conn
-
 def check_table_exists(table_name):
     # conn = sqlite3.connect('mysqlite.db')
     # c = conn.cursor()
