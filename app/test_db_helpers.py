@@ -9,20 +9,25 @@ THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 key_json_file_path = os.path.join(THIS_FOLDER, 'key.json')
 DATABASE = os.path.join(THIS_FOLDER, 'database.db')
 
+conn = sqlite3.connect(DATABASE)
+
+
 def get_db():
     # db = getattr(g, '_database', None)
     # if db is None:
-    db = sqlite3.connect(DATABASE)
-    return db
+    conn = sqlite3.connect(DATABASE)
+
+    return conn
 
 def check_table_exists(table_name):
     # conn = sqlite3.connect('mysqlite.db')
     # c = conn.cursor()
 
     sql_delete_table = ''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name=' '''+table_name+''' ' '''
-    db = get_db()
+    c = conn.cursor()
+    c.execute(sql_delete_table)
     #db.execute("PRAGMA busy_timeout = 30000")
-    cur = db.execute(sql_delete_table)
+    #cur = db.execute(sql_delete_table)
     #c = db.cursor()
     
 
@@ -32,13 +37,13 @@ def check_table_exists(table_name):
     #c.execute(''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name=' '''+table_name+''' ' ''')
 
     #if the count is 1, then table exists
-    if db.fetchone()[0]==1: 
-        db.commit()
-        cur.close()
+    if c.fetchone()[0]==1: 
+        conn.commit()
+        #cur.close()
         return True
     else:
-        db.commit()
-        cur.close()
+        conn.commit()
+        #cur.close()
         return False
 
 def create_todo(todo:TodoItem):
@@ -47,8 +52,7 @@ def create_todo(todo:TodoItem):
  
     query = ''' INSERT INTO '''+ current_user.username+'''(user_id,title,date,is_done)
               VALUES(?,?,?,?) '''
-    db = get_db()
-    cur = db.cursor()
+    cur = conn.cursor()
     cur.execute(query, todo_tuple)
     db.commit()
     #db.close()
@@ -56,9 +60,10 @@ def create_todo(todo:TodoItem):
 
 def query_db(query, args=(), username = 'todos', one=False):
     try:
-        cur = get_db().execute(query, args)
-        rv = cur.fetchall()
-        cur.close()
+        c = conn.cursor()
+        c.execute(query, args)
+        rv = c.fetchall()
+        #cur.close()
         return (rv[0] if rv else None) if one else rv
 
     except:
@@ -68,11 +73,11 @@ def query_db(query, args=(), username = 'todos', one=False):
                                         date text NOT NULL,
                                         is_done integer default 0
                                     )"""
-        db = get_db()
+        c = conn.cursor()
         #db.execute("PRAGMA busy_timeout = 30000")
-        cur = db.execute(sql_create_table)
-        db.commit()
-        cur.close()
+        c.execute(sql_create_table)
+        conn.commit()
+        #cur.close()
 
         # #create the first todo for first-time user
         # args = (username, 'This is your first todo', datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S"),0)
@@ -80,27 +85,28 @@ def query_db(query, args=(), username = 'todos', one=False):
         # #cur.commit()
 
         query = 'select * from test_table'
-        cur = get_db().execute(query, ())
-        rv = cur.fetchall()
-        cur.close()
+        c.execute(query, ())
+        conn.commit()
+        rv = c.fetchall()
+        #cur.close()
         return (rv[0] if rv else None) if one else rv
 
 def delete_todo(title:str):
     user_id = 'test_table'
     query = '''DELETE FROM '''  + user_id +''' WHERE title=?'''
     query_tuple = (title,)
-    db = get_db()
-    cur = db.cursor()
+    
+    cur = conn.cursor()
     cur.execute(query, query_tuple)
-    db.commit()
+    conn.commit()
 
 def delete_table(table_name):
     query = '''DROP TABLE IF EXISTS '''+ table_name
-    db = get_db()
+    cur = conn.cursor()
     #db.execute("PRAGMA busy_timeout = 30000")
     cur = db.execute(query)
-    db.commit()
-    cur.close()
+    conn.commit()
+    #cur.close()
 
 
 def test_db_helpers():
