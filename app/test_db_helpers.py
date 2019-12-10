@@ -2,7 +2,6 @@ import os
 import sqlite3
 import datetime
 import json
-import routes
 from datetime import datetime
 from todo_item import TodoItem
 
@@ -95,6 +94,14 @@ def delete_todo(title:str):
     cur.execute(query, query_tuple)
     db.commit()
 
+def delete_table(table_name):
+    query = '''DROP TABLE IF EXISTS '''+ table_name
+    db = get_db()
+    #db.execute("PRAGMA busy_timeout = 30000")
+    cur = db.execute(query)
+    db.commit()
+    cur.close()
+
 
 def test_db_helpers():
     table_name = 'test_table'
@@ -112,7 +119,7 @@ def test_db_helpers():
     todos = []
     for todo in query_db('select * from {username}'):
         print(todo)
-        todo_items[todo[1]] = False
+        
         if todo[2] != '':
             temp_todo = TodoItem(todo[1], True if todo[3]==1 else False, datetime.datetime.strptime(todo[2],"%m/%d/%Y, %H:%M:%S"))
             print(temp_todo.is_done)
@@ -125,5 +132,5 @@ def test_db_helpers():
 
 
     #testing delete table function
-    routes.delete_table(table_name)
+    delete_table(table_name)
     assert check_table_exists(table_name) == False
