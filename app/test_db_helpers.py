@@ -46,6 +46,7 @@ def create_todo(todo:TodoItem):
     query = ''' INSERT INTO '''+ user_id +'''(user_id,title,date,is_done)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
+    return 0
     cur.execute(query, todo_tuple)
     conn.commit()
     
