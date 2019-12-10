@@ -93,14 +93,14 @@ def delete_todo(title:str):
     query_tuple = (title,)
     
     cur = conn.cursor()
-    cur.execute(query, query_tuple)
+    #cur.execute(query, query_tuple)
     conn.commit()
 
 def delete_table(table_name):
     query = '''DROP TABLE IF EXISTS '''+ table_name
     cur = conn.cursor()
     #db.execute("PRAGMA busy_timeout = 30000")
-    cur.execute(query)
+    #cur.execute(query)
     conn.commit()
     #cur.close()
 
