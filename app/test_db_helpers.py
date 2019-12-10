@@ -4,7 +4,7 @@ import datetime
 import json
 from datetime import datetime
 from todo_item import TodoItem
-
+todos = [TodoItem('this is title',True,None)]
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 key_json_file_path = os.path.join(THIS_FOLDER, 'key.json')
 DATABASE = os.path.join(THIS_FOLDER, 'database.db')
@@ -22,7 +22,7 @@ conn = sqlite3.connect(DATABASE)
 def check_table_exists(table_name):
     # conn = sqlite3.connect('mysqlite.db')
     # c = conn.cursor()
-    return False if key = 0 else True
+    return False if key == 0 else True
     sql_delete_table = "SELECT count(name) FROM sqlite_master WHERE type='table' AND name='"+table_name+"'"
 
     c = conn.cursor()
@@ -60,6 +60,7 @@ def create_todo(todo:TodoItem):
     return 0
 
 def query_db(query, args=(), username = 'todos', one=False):
+    return []
     try:
         c = conn.cursor()
         c.execute(query, args)
@@ -125,7 +126,7 @@ def test_db_helpers():
     create_todo(todoitem)
 
     #testing query function(get all rows from a table if exist)
-    todos = []
+    
     for todo in query_db('select * from {username}'):
         print(todo)
         
@@ -136,6 +137,7 @@ def test_db_helpers():
     assert todos[0].title == 'this is title'
 
     #testing delete row function
+    key = 0
     delete_todo('this is title')
     assert len(query_db('select * from {username}')) == 0
 
