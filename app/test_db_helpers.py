@@ -12,12 +12,12 @@ DATABASE = os.path.join(THIS_FOLDER, 'database.db')
 conn = sqlite3.connect(DATABASE)
 
 
-def get_db():
-    # db = getattr(g, '_database', None)
-    # if db is None:
-    conn = sqlite3.connect(DATABASE)
+# def get_db():
+#     # db = getattr(g, '_database', None)
+#     # if db is None:
+#     conn = sqlite3.connect(DATABASE)
 
-    return conn
+#     return conn
 
 def check_table_exists(table_name):
     # conn = sqlite3.connect('mysqlite.db')
@@ -50,11 +50,11 @@ def create_todo(todo:TodoItem):
     user_id = 'test_table'
     todo_tuple = (user_id, todo.title,todo.creation_date.strftime("%m/%d/%Y, %H:%M:%S"), 1 if todo.is_done else 0)
  
-    query = ''' INSERT INTO '''+ current_user.username+'''(user_id,title,date,is_done)
+    query = ''' INSERT INTO '''+ user_id +'''(user_id,title,date,is_done)
               VALUES(?,?,?,?) '''
     cur = conn.cursor()
     cur.execute(query, todo_tuple)
-    db.commit()
+    conn.commit()
     #db.close()
     return 0
 
@@ -104,7 +104,7 @@ def delete_table(table_name):
     query = '''DROP TABLE IF EXISTS '''+ table_name
     cur = conn.cursor()
     #db.execute("PRAGMA busy_timeout = 30000")
-    cur = db.execute(query)
+    cur.execute(query)
     conn.commit()
     #cur.close()
 
