@@ -123,5 +123,5 @@ def test_db_helpers():
 
 
     #testing delete table function
-    routes.delete_table(table_name):
+    routes.delete_table(table_name)
     assert check_table_exists(table_name) == False
