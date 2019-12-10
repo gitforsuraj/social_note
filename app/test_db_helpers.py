@@ -94,7 +94,7 @@ def delete_todo(title:str):
     db.commit()
 
 
-def test_db_helpers:
+def test_db_helpers():
     table_name = 'test_table'
     assert check_table_exists(table_name) == False
 
