@@ -24,14 +24,13 @@ def check_table_exists(table_name):
     # c = conn.cursor()
 
     sql_delete_table = ''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name=' '''+table_name+''' ' '''
-    sql_delete_table = ''' SELECT count(name) FROM sqlite_master WHERE type='table' AND name= a '''
 
     c = conn.cursor()
     c.execute(sql_delete_table)
     #db.execute("PRAGMA busy_timeout = 30000")
     #cur = db.execute(sql_delete_table)
     #c = db.cursor()
-    
+    conn.commit()
 
     
 			
@@ -40,12 +39,11 @@ def check_table_exists(table_name):
 
     #if the count is 1, then table exists
     if c.fetchone()[0]==1: 
-        conn.commit()
+        
         #cur.close()
         return True
     else:
-        conn.commit()
-        #cur.close()
+        
         return False
 
 def create_todo(todo:TodoItem):
