@@ -4,6 +4,7 @@ import datetime
 import json
 from datetime import datetime
 from todo_item import TodoItem
+from flask import g
 
 THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
 key_json_file_path = os.path.join(THIS_FOLDER, 'key.json')
