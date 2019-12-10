@@ -1,5 +1,5 @@
 html {
-  background-color: #1E90FF;
+  background-color: teal;
 }
 
 .mainheader{
@@ -9,7 +9,7 @@ html {
 
 .square{
   border-radius: 15px;
-  background-color: #1E90FF;
+  background-color: teal;
   width: 500px;
   height: 500px;
   position: absolute;

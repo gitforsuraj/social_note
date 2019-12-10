@@ -146,6 +146,13 @@ def delete_todo(title:str):
     cur.execute(query, query_tuple)
     db.commit()
     
+def delete_table(table_name):
+    query = '''DROP TABLE IF EXISTS '''+ table_name
+    db = get_db()
+    #db.execute("PRAGMA busy_timeout = 30000")
+    cur = db.execute(query)
+    db.commit()
+    cur.close()
 
 
 @app.route('/postmethod',methods = ['POST'])
@@ -187,18 +194,6 @@ def index():
         print(form.field1.data)
     else:
         form.field1.description = ''
-
-    # posts = [
-    #     {
-    #         'author': {'username': 'John'},
-    #         'body': 'Beautiful day in Portland!'
-    #     },
-    #     {
-    #         'author': {'username': 'Susan'},
-    #         'body': 'The Avengers movie was so cool!'
-    #     }
-    # ]
-
 
     #get all todos from database
     print('before the for loop')
